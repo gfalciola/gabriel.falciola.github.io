@@ -250,14 +250,54 @@
         }
 
         @media print {
-            .language-switcher, #download-pdf-en {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            header, section {
+                box-shadow: none;
+                border-radius: 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            section {
+                padding: 20px 0;
+            }
+            
+            .language-switcher, #download-pdf-en, #download-pdf-es {
                 display: none;
             }
-            .pdf-page-break {
+
+            section:hover {
+                transform: none;
+            }
+
+            .page-break-before {
                 page-break-before: always;
             }
-            .pdf-avoid-break {
+
+            .page-break-after {
+                page-break-after: always;
+            }
+
+            .page-break-inside-avoid {
                 page-break-inside: avoid;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
             }
         }
     </style>
@@ -286,7 +326,7 @@
             <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to dynamic and innovative environments.</p>
         </section>
 
-        <section id="experience">
+        <section id="experience" class="page-break-inside-avoid">
             <h2>Experience</h2>
 
             <div class="experience-item">
@@ -387,7 +427,7 @@
 
         </section>
 
-        <section id="skills" class="pdf-avoid-break">
+        <section id="skills" class="page-break-inside-avoid">
             <h2>Skills</h2>
             <ul class="skills-list">
                 <li>Project Management Tools (Jira, Asana, Trello)</li>
@@ -416,7 +456,7 @@
             </ul>
         </section>
 
-        <section id="certifications" class="pdf-page-break">
+        <section id="certifications" class="page-break-inside-avoid">
             <h2>Certifications</h2>
             <div class="certifications-list">
                 <ul>
@@ -425,7 +465,7 @@
             </div>
         </section>
 
-        <section id="education">
+        <section id="education" class="page-break-inside-avoid">
             <h2>Education</h2>
             <div class="education-item">
                 <h3>Psychology (Incomplete)</h3>
@@ -439,9 +479,13 @@
                 <h3>Professional Music Interpreter</h3>
                 <p>Argentine Musicians Union | 2001-2005 </p>
             </div>
+            <div class="education-item">
+                <h3>Bachelor of Business Administration</h3>
+                <p>Digital House | 2023</p>
+            </div>
         </section>
 
-        <section id="languages">
+        <section id="languages" class="page-break-inside-avoid">
             <h2>Languages</h2>
             <ul>
                 <li><strong>Spanish:</strong> Native Speaker </li>
