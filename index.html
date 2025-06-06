@@ -146,7 +146,7 @@
             padding-bottom: 10px;
             margin-top: 0;
             margin-bottom: 20px;
-            font-size: 1.8em;
+            font-size: 1.5em;
         }
         
         .experience-item, .education-item {
@@ -246,6 +246,33 @@
             }
             section h2 {
                 font-size: 1.5em;
+            }
+        }
+
+        /* Print and PDF Generation Styles */
+        @media print, .pdf-mode {
+            body {
+                background-color: #fff;
+            }
+            .language-switcher {
+                display: none;
+            }
+            section, .container {
+                box-shadow: none !important;
+                transform: none !important;
+                border: 1px solid var(--border-color);
+            }
+            .experience-item, .education-item {
+                page-break-inside: avoid;
+            }
+            .skills-list li {
+                border: 1px solid var(--secondary-color);
+                background-color: #fff !important;
+                color: var(--primary-color) !important;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
             }
         }
     </style>
@@ -442,14 +469,23 @@
     <script>
         document.getElementById('download-pdf-en').addEventListener('click', function () {
             const element = document.getElementById('resume-content-en');
+            const langSwitcher = document.querySelector('.language-switcher');
+            
+            // Add PDF mode class for styling and hide switcher
+            document.body.classList.add('pdf-mode');
+
             const opt = {
                 margin:       0.5,
                 filename:     'Gabriel-Falciola-Resume.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
+                html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
-            html2pdf().set(opt).from(element).save();
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Remove class after generation
+                document.body.classList.remove('pdf-mode');
+            });
         });
     </script>
 </body>
