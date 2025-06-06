@@ -49,6 +49,22 @@
             color: var(--secondary-color);
         }
 
+        #download-pdf-en, #download-pdf-es {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        #download-pdf-en:hover, #download-pdf-es:hover {
+            background-color: #2980b9;
+        }
+
         .container {
             max-width: 960px;
             margin: 20px auto;
@@ -237,9 +253,10 @@
 <body>
     <div class="language-switcher">
         <span class="current-lang">English</span> | <a href="es.html">Español</a>
+        <button id="download-pdf-en">Download PDF</button>
     </div>
 
-    <div class="container">
+    <div class="container" id="resume-content-en">
         <header>
             <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
             <h1>Gabriel Falciola</h1>
@@ -421,5 +438,19 @@
         </section>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('download-pdf-en').addEventListener('click', function () {
+            const element = document.getElementById('resume-content-en');
+            const opt = {
+                margin:       0.5,
+                filename:     'Gabriel-Falciola-Resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
 </body>
 </html> 
