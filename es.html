@@ -249,30 +249,32 @@
             }
         }
 
-        /* Print and PDF Generation Styles */
-        @media print, .pdf-mode {
-            body {
-                background-color: #fff;
-            }
-            .language-switcher {
+        /* Styles for PDF Generation */
+        .pdf-mode .language-switcher,
+        .pdf-mode #download-pdf-es {
+            display: none;
+        }
+        .pdf-mode section {
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        .pdf-mode .pdf-page-break {
+            page-break-before: always;
+        }
+        .pdf-mode .pdf-avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Styles for Browser's Print function */
+        @media print {
+            .language-switcher, #download-pdf-es {
                 display: none;
             }
-            section, .container {
-                box-shadow: none !important;
-                transform: none !important;
-                border: 1px solid var(--border-color);
+            .pdf-page-break {
+                page-break-before: always;
             }
-            .experience-item, .education-item {
+            .pdf-avoid-break {
                 page-break-inside: avoid;
-            }
-            .skills-list li {
-                border: 1px solid var(--secondary-color);
-                background-color: #fff !important;
-                color: var(--primary-color) !important;
-            }
-            a {
-                text-decoration: none;
-                color: inherit;
             }
         }
     </style>
@@ -470,7 +472,6 @@
         document.getElementById('download-pdf-es').addEventListener('click', function () {
             const element = document.getElementById('resume-content-es');
 
-            // Add PDF mode class for styling
             document.body.classList.add('pdf-mode');
 
             const opt = {
@@ -478,11 +479,11 @@
                 filename:     'Gabriel-Falciola-CV.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak:    { mode: 'css' }
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
-                // Remove class after generation
                 document.body.classList.remove('pdf-mode');
             });
         });
