@@ -326,7 +326,7 @@
             <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to dynamic and innovative environments.</p>
         </section>
 
-        <section id="experience" class="page-break-inside-avoid page-break-before">
+        <section id="experience" class="pdf-avoid-break pdf-page-break">
             <h2>Experience</h2>
 
             <div class="experience-item">
@@ -427,7 +427,7 @@
 
         </section>
 
-        <section id="skills" class="page-break-inside-avoid">
+        <section id="skills" class="pdf-avoid-break">
             <h2>Skills</h2>
             <ul class="skills-list">
                 <li>Project Management Tools (Jira, Asana, Trello)</li>
@@ -456,7 +456,7 @@
             </ul>
         </section>
 
-        <section id="certifications" class="page-break-inside-avoid">
+        <section id="certifications" class="pdf-avoid-break">
             <h2>Certifications</h2>
             <div class="certifications-list">
                 <ul>
@@ -465,7 +465,7 @@
             </div>
         </section>
 
-        <section id="education" class="page-break-inside-avoid">
+        <section id="education" class="pdf-avoid-break">
             <h2>Education</h2>
             <div class="education-item">
                 <h3>Psychology (Incomplete)</h3>
@@ -485,7 +485,7 @@
             </div>
         </section>
 
-        <section id="languages" class="page-break-inside-avoid">
+        <section id="languages" class="pdf-avoid-break">
             <h2>Languages</h2>
             <ul>
                 <li><strong>Spanish:</strong> Native Speaker </li>
@@ -505,7 +505,7 @@
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak:    { before: '.pdf-page-break', avoid: '.pdf-avoid-break' }
+                pagebreak:    { before: '.pdf-page-break', avoid: ['.pdf-avoid-break', 'section'] }
             };
 
             // Hide the download/language switcher before generation

@@ -326,7 +326,7 @@
             <p>Un profesional proactivo y versátil con una amplia trayectoria en liderazgo, optimización de procesos y tecnología.</p>
         </section>
 
-        <section id="experience">
+        <section id="experience" class="pdf-avoid-break pdf-page-break">
             <h2>Experiencia</h2>
 
             <div class="experience-item">
@@ -456,7 +456,7 @@
             </ul>
         </section>
 
-        <section id="certifications" class="pdf-page-break">
+        <section id="certifications" class="pdf-avoid-break">
             <h2>Certificaciones</h2>
             <div class="certifications-list">
                 <ul>
@@ -466,7 +466,7 @@
             </div>
         </section>
 
-        <section id="education">
+        <section id="education" class="pdf-avoid-break">
             <h2>Educación</h2>
             <div class="education-item">
                 <h3>Psicología (Incompleto)</h3>
@@ -486,7 +486,7 @@
             </div>
         </section>
 
-        <section id="languages">
+        <section id="languages" class="pdf-avoid-break">
             <h2>Idiomas</h2>
             <ul>
                 <li><strong>Español:</strong> Nativo</li>
@@ -506,7 +506,7 @@
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak:    { before: '.pdf-page-break', avoid: '.pdf-avoid-break' }
+                pagebreak:    { before: '.pdf-page-break', avoid: ['.pdf-avoid-break', 'section'] }
             };
 
             // Hide the download/language switcher before generation
