@@ -305,7 +305,8 @@
 <body>
     <div class="language-switcher">
         <a href="index.html">English</a> | <span class="current-lang">Español</span>
-        <button id="download-pdf-es">Descargar PDF</button>
+        <button id="download-pdf-full-es">Descargar PDF Completo</button>
+        <button id="download-pdf-10y-es">Descargar PDF (10 Años)</button>
     </div>
 
     <div class="container" id="resume-content-es">
@@ -493,24 +494,75 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
-        document.getElementById('download-pdf-es').addEventListener('click', function () {
+        const downloadButtons = document.querySelector('.language-switcher');
+
+        const pdfOptions = {
+            margin:       0.5,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+            pagebreak:    { before: '.pdf-page-break', avoid: ['.pdf-avoid-break', 'section', '.experience-item'] }
+        };
+
+        const monthMap = {
+            'enero': 0, 'febrero': 1, 'marzo': 2, 'abril': 3, 'mayo': 4, 'junio': 5,
+            'julio': 6, 'agosto': 7, 'septiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11
+        };
+
+        // Full Resume
+        document.getElementById('download-pdf-full-es').addEventListener('click', function () {
             const element = document.getElementById('resume-content-es');
+            const opt = {
+                ...pdfOptions,
+                filename: 'Gabriel-Falciola-CV.pdf'
+            };
+            
+            downloadButtons.style.display = 'none';
+            html2pdf().set(opt).from(element).save().then(() => {
+                downloadButtons.style.display = 'block';
+            });
+        });
+
+        // 10-Year Resume
+        document.getElementById('download-pdf-10y-es').addEventListener('click', function () {
+            const element = document.getElementById('resume-content-es');
+            const experienceItems = element.querySelectorAll('#experience .experience-item');
+            const tenYearsAgo = new Date().getFullYear() - 10;
+            const hiddenItems = [];
+
+            experienceItems.forEach(item => {
+                try {
+                    const dateString = item.querySelector('p').textContent.split('|')[2].trim();
+                    const endDateString = dateString.split('–')[1].trim().split('(')[0].trim();
+                    
+                    let endDateYear;
+                    if (endDateString.toLowerCase().includes('presente')) {
+                        endDateYear = new Date().getFullYear();
+                    } else {
+                        const parts = endDateString.split(' ');
+                        endDateYear = parseInt(parts[2], 10); // 'mayo de 2017' -> parts[2] is the year
+                    }
+
+                    if (endDateYear < tenYearsAgo) {
+                        item.style.display = 'none';
+                        hiddenItems.push(item);
+                    }
+                } catch (e) {
+                    console.error('Could not parse date for item:', item, e);
+                }
+            });
 
             const opt = {
-                margin:       0.5,
-                filename:     'Gabriel-Falciola-CV.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak:    { before: '.pdf-page-break', avoid: ['.pdf-avoid-break', 'section', '.experience-item'] }
+                ...pdfOptions,
+                filename: 'Gabriel-Falciola-CV-10-Anos.pdf'
             };
 
-            // Hide the download/language switcher before generation
-            document.querySelector('.language-switcher').style.display = 'none';
-
+            downloadButtons.style.display = 'none';
             html2pdf().set(opt).from(element).save().then(() => {
-                // Show it again after generation
-                document.querySelector('.language-switcher').style.display = 'block';
+                hiddenItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+                downloadButtons.style.display = 'block';
             });
         });
     </script>

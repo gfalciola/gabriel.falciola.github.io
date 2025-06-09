@@ -305,7 +305,8 @@
 <body>
     <div class="language-switcher">
         <span class="current-lang">English</span> | <a href="es.html">Español</a>
-        <button id="download-pdf-en">Download PDF</button>
+        <button id="download-pdf-full-en">Download Full PDF</button>
+        <button id="download-pdf-10y-en">Download 10-Year PDF</button>
     </div>
 
     <div class="container" id="resume-content-en">
@@ -492,24 +493,70 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
-        document.getElementById('download-pdf-en').addEventListener('click', function () {
+        const downloadButtons = document.querySelector('.language-switcher');
+
+        const pdfOptions = {
+            margin:       0.5,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+            pagebreak:    { before: '.pdf-page-break', avoid: ['.pdf-avoid-break', 'section', '.experience-item'] }
+        };
+
+        // Full Resume
+        document.getElementById('download-pdf-full-en').addEventListener('click', function () {
             const element = document.getElementById('resume-content-en');
+            const opt = {
+                ...pdfOptions,
+                filename: 'Gabriel-Falciola-Resume.pdf'
+            };
+            
+            downloadButtons.style.display = 'none';
+            html2pdf().set(opt).from(element).save().then(() => {
+                downloadButtons.style.display = 'block';
+            });
+        });
+
+        // 10-Year Resume
+        document.getElementById('download-pdf-10y-en').addEventListener('click', function () {
+            const element = document.getElementById('resume-content-en');
+            const experienceItems = element.querySelectorAll('#experience .experience-item');
+            const tenYearsAgo = new Date().getFullYear() - 10;
+            const hiddenItems = [];
+
+            experienceItems.forEach(item => {
+                try {
+                    const dateString = item.querySelector('p').textContent.split('|')[2].trim();
+                    const endDateString = dateString.split('–')[1].trim().split('(')[0].trim();
+                    
+                    let endDateYear;
+                    if (endDateString.toLowerCase() === 'present') {
+                        endDateYear = new Date().getFullYear();
+                    } else {
+                        const parts = endDateString.split(' ');
+                        endDateYear = parseInt(parts[1], 10);
+                    }
+
+                    if (endDateYear < tenYearsAgo) {
+                        item.style.display = 'none';
+                        hiddenItems.push(item);
+                    }
+                } catch (e) {
+                    console.error('Could not parse date for item:', item, e);
+                }
+            });
 
             const opt = {
-                margin:       0.5,
-                filename:     'Gabriel-Falciola-Resume.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak:    { before: '.pdf-page-break', avoid: ['.pdf-avoid-break', 'section', '.experience-item'] }
+                ...pdfOptions,
+                filename: 'Gabriel-Falciola-Resume-10-Years.pdf'
             };
 
-            // Hide the download/language switcher before generation
-            document.querySelector('.language-switcher').style.display = 'none';
-
+            downloadButtons.style.display = 'none';
             html2pdf().set(opt).from(element).save().then(() => {
-                // Show it again after generation
-                document.querySelector('.language-switcher').style.display = 'block';
+                hiddenItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+                downloadButtons.style.display = 'block';
             });
         });
     </script>
