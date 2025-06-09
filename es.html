@@ -6,329 +6,198 @@
     <title>Gabriel Falciola - Perfil Profesional</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --background-color: #ecf0f1;
-            --text-color: #34495e;
-            --card-background: #ffffff;
-            --shadow-color: rgba(0,0,0,0.1);
-            --border-color: #bdc3c7;
+            --sidebar-bg: #f3f4f6;
+            --main-bg: #ffffff;
+            --text-color: #111827;
+            --text-secondary: #4b5563;
+            --accent-color: #000000;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
             color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
+            background-color: var(--main-bg);
+            line-height: 1.7;
         }
 
         .language-switcher {
-            text-align: right;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
-        }
-
-        .language-switcher a, .language-switcher span {
-            color: white;
-            text-decoration: none;
-            margin: 0 5px;
-            font-weight: bold;
-        }
-
-        .language-switcher a:hover {
-            text-decoration: underline;
+            display: none; /* Will be hidden for this design, can be re-enabled later */
         }
         
-        .language-switcher .current-lang {
-            font-weight: bold;
-            color: var(--secondary-color);
+        .resume-container {
+            display: flex;
+            max-width: 1200px;
+            min-height: 100vh;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
-        #download-pdf-en, #download-pdf-es {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Lato', sans-serif;
-            font-weight: bold;
-            margin-left: 15px;
+        .sidebar {
+            background-color: var(--sidebar-bg);
+            width: 35%;
+            padding: 40px 30px;
+            color: var(--text-secondary);
         }
 
-        #download-pdf-en:hover, #download-pdf-es:hover {
-            background-color: #2980b9;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
+        .main-content {
+            background-color: var(--main-bg);
+            width: 65%;
+            padding: 40px 50px;
         }
 
         .profile-pic {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 4px solid var(--secondary-color);
             object-fit: cover;
-            object-position: 20% 50%;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px var(--shadow-color);
+            object-position: center;
+            margin: 0 auto 30px auto;
+            display: block;
+            border: 5px solid var(--main-bg);
         }
 
-        header {
-            text-align: left;
-            padding-bottom: 30px;
+        .sidebar-section {
             margin-bottom: 30px;
-            border-bottom: 2px solid var(--secondary-color);
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            gap: 40px;
         }
 
-        .header-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+        .sidebar-section h2 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 900;
+            font-size: 1.4em;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
-        #about {
-            flex: 1.5;
-            margin: 0;
-            padding: 0;
-            background-color: transparent;
-            box-shadow: none;
-            border-radius: 0;
+        .contact-info p, .skills-list p, .languages-list p {
+            margin-bottom: 8px;
         }
         
-        #about h2 {
-            margin-top: 0;
-        }
-
-        header h1 {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 2.8em;
-            font-weight: 700;
-        }
-        header p {
-            margin: 10px 0;
-            font-size: 1.2em;
-            color: var(--secondary-color);
-            font-style: italic;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-            font-size: 1em;
-        }
         .contact-info a {
-            color: var(--primary-color);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s ease;
         }
+        
         .contact-info a:hover {
-            color: var(--secondary-color);
+            color: var(--accent-color);
             text-decoration: underline;
         }
-        .contact-info span {
-            display: inline-flex;
-            align-items: center;
+
+        .languages-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .languages-list p.language-name {
+            font-weight: 700;
+            color: var(--text-color);
         }
 
-        section {
+        .main-header h1 {
+            font-family: 'Lato', sans-serif;
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+
+        .main-header h2 {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .main-section {
             margin-bottom: 30px;
-            padding: 25px;
-            background-color: var(--card-background);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px var(--shadow-color);
         }
 
-        section h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-top: 0;
+        .main-section h3 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 900;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
             margin-bottom: 20px;
-            font-size: 1.8em;
         }
         
+        #about-me p {
+             font-size: 1.05em;
+        }
+
         .experience-item, .education-item {
             margin-bottom: 25px;
-            padding-left: 15px;
-            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .experience-item h4, .education-item h4 {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 2px;
         }
 
-        .experience-item:last-child, .education-item:last-child {
-            margin-bottom: 0;
+        .experience-item .company-info, .education-item .institution-info {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 10px;
         }
-
-        .experience-item h3, .education-item h3 {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 1.3em;
-        }
-        .experience-item p, .education-item p {
-            margin: 5px 0;
-            font-style: italic;
-            color: #7f8c8d;
-        }
+        
         .experience-item ul {
-            list-style-type: none;
+            list-style: none;
             padding-left: 0;
-            margin-top: 10px;
         }
+        
         .experience-item ul li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
+             padding-left: 20px;
+             position: relative;
         }
+
         .experience-item ul li::before {
             content: '›';
             position: absolute;
             left: 0;
-            color: var(--secondary-color);
+            color: var(--accent-color);
             font-weight: bold;
-            font-size: 1.2em;
         }
 
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            list-style: none;
-            padding: 0;
-        }
-        .skills-list li {
-            background-color: var(--secondary-color);
-            color: var(--card-background);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.95em;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+        .education-item h4 span {
+            font-weight: 400;
         }
 
-        .skills-list li:hover {
-            background-color: var(--primary-color);
-        }
-
-        .certifications-list ul, #languages ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .certifications-list ul li, #languages ul li {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        @media (max-width: 768px) {
-            header {
+        @media (max-width: 1024px) {
+            .resume-container {
                 flex-direction: column;
-                align-items: center;
-                text-align: center;
             }
-            .header-content {
-                align-items: center;
-            }
-            .contact-info {
-                align-items: center;
-            }
-            .container {
-                padding: 15px;
-            }
-            header h1 {
-                font-size: 2.2em;
-            }
-            header p {
-                font-size: 1.1em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-             header p {
-                font-size: 1em;
-            }
-            section {
-                padding: 20px;
-            }
-            section h2 {
-                font-size: 1.5em;
+            .sidebar, .main-content {
+                width: 100%;
             }
         }
 
         @media print {
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #fff;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .container {
-                max-width: 100%;
-                margin: 0;
-                padding: 0;
+            body { background-color: white; }
+            .resume-container {
+                display: block;
                 box-shadow: none;
             }
-
-            header, section {
-                box-shadow: none;
-                border-radius: 0;
-                border-bottom: 1px solid var(--border-color);
-            }
-            
-            section {
+            .sidebar, .main-content {
+                width: 100%;
                 padding: 20px 0;
             }
-            
-            .language-switcher, #download-pdf-en, #download-pdf-es {
-                display: none;
-            }
-
-            section:hover {
-                transform: none;
-            }
-
-            .page-break-before {
-                page-break-before: always;
-            }
-
-            .page-break-after {
-                page-break-after: always;
-            }
-
-            .page-break-inside-avoid {
-                page-break-inside: avoid;
-            }
-
-            a {
-                text-decoration: none;
-                color: inherit;
-            }
+            .sidebar { background-color: white; }
+            .profile-pic { border: none; }
         }
     </style>
 </head>
@@ -339,188 +208,111 @@
         <button id="download-pdf-short-es">Descargar PDF Resumido</button>
     </div>
 
-    <div class="container" id="resume-content-es">
-        <header>
-            <div class="header-content">
-                <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
+    <div class="resume-container" id="resume-content-es">
+        <aside class="sidebar">
+            <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
+            
+            <section class="sidebar-section contact-info">
+                <h2>Contacto</h2>
+                <p><a href="mailto:gabriel.falciola@gmail.com">gabriel.falciola@gmail.com</a></p>
+                <p>Neuquén 1718, 4° A, Capital Federal, Buenos Aires, Argentina</p>
+                <p><a href="https://www.linkedin.com/in/gabrielfalciola/" target="_blank">linkedin.com/in/gabrielfalciola</a></p>
+                <p>+54 9 11 6727-5912</p>
+            </section>
+
+            <section class="sidebar-section skills-list">
+                <h2>Habilidades</h2>
+                <p>Liderazgo</p>
+                <p>Reclutamiento de TI</p>
+                <p>Analítico</p>
+                <p>Trabajo en Equipo</p>
+                <p>Creativo</p>
+                <p>Herramientas de gestión de proyectos</p>
+                <p>Programación de software</p>
+                <p>Kit de herramientas de reclutamiento</p>
+            </section>
+
+            <section class="sidebar-section languages-list">
+                <h2>Idiomas</h2>
+                <p class="language-name">Español</p>
+                <p>Nativo</p>
+                <p class="language-name">Inglés</p>
+                <p>Dominio Profesional Completo</p>
+            </section>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
                 <h1>Gabriel Falciola</h1>
-                <p>Gerente de Proyectos | Líder de TI | Talento y Estrategia | Impulsando la Innovación</p>
-                <div class="contact-info">
-                    <span>Buenos Aires, Argentina</span>
-                    <a href="mailto:gabriel.falciola@gmail.com">gabriel.falciola@gmail.com</a>
-                    <a href="https://www.linkedin.com/in/gabrielfalciola/" target="_blank">linkedin.com/in/gabrielfalciola</a>
-                    <span>+54 9 11 6727-5912</span>
-                </div>
-            </div>
-            <section id="about">
-                <h2>Sobre Mí</h2>
+                <h2>Gerente de Proyectos | Líder de TI | Talento y Estrategia | Impulsando la Innovación</h2>
+            </header>
+
+            <section class="main-section" id="about-me">
+                <h3>Sobre Mí</h3>
                 <p>Profesional de IT altamente calificado con más de 25 años de amplia experiencia liderando proyectos complejos, adquisición de talento estratégico y desarrollo de software. Capacidad demostrada para construir y potenciar equipos multifuncionales de alto rendimiento, gestionar iniciativas a gran escala e impulsar resultados de negocio tangibles a través de un liderazgo eficaz y soluciones innovadoras. Experto en cultivar relaciones sólidas con los clientes e identificar nuevas oportunidades de mercado, con una combinación de experiencia técnica y liderazgo centrado en las personas. Busco potenciar mi experiencia en Gestión de Proyectos y Liderazgo de IT para contribuir en entornos dinámicos e innovadores.</p>
             </section>
-        </header>
 
-        <section id="experience" class="pdf-avoid-break pdf-page-break">
-            <h2>Experiencia</h2>
+            <section class="main-section" id="experience">
+                <h3>Experiencia</h3>
+                <div class="experience-item">
+                    <h4>Gerente de Proyectos</h4>
+                    <p class="company-info">IT Crowd | 2024 - Presente</p>
+                    <ul>
+                        <li>Liderando múltiples proyectos de desarrollo simultáneos para startups en etapa inicial, desde la concepción hasta el lanzamiento, utilizando metodologías Ágiles (Scrum/Kanban) para asegurar la entrega oportuna de MVPs y funcionalidades clave.</li>
+                        <li>Coordinando y capacitando a equipos multifuncionales (desarrolladores, diseñadores, QA), fomentando un ambiente de colaboración y traduciendo visiones complejas de productos en sprints de desarrollo claros y accionables.</li>
+                        <li>Implementando sólidas estrategias de seguimiento de proyectos y comunicación, y gestionando los procesos de facturación de clientes para garantizar operaciones fluidas y una comunicación clara con los stakeholders.</li>
+                    </ul>
+                </div>
+                 <div class="experience-item">
+                    <h4>Director Ejecutivo (CEO)</h4>
+                    <p class="company-info">IT Scout | 2022 - 2024</p>
+                    <ul>
+                        <li>Co-fundé y escalé IT Scout, liderando todas las facetas estratégicas y operativas de la empresa, incluida la supervisión directa e indirecta de todas las áreas para garantizar el correcto funcionamiento y la resolución de conflictos.</li>
+                        <li>Dirigí la toma de decisiones financieras integrales, la gestión de recursos y las operaciones en busca de las estrategias globales de la empresa.</li>
+                        <li>Cultivé y mantuve relaciones clave con los clientes, estableciendo el contacto inicial y asegurando asociaciones a largo plazo.</li>
+                        <li>Lideré la prospección de mercado y el análisis exploratorio, identificando nuevas oportunidades de crecimiento (nuevos mercados, productos, servicios) para la expansión de la empresa.</li>
+                        <li>Desarrollé y utilicé un marco de métricas clave para ayudar en las proyecciones y monitorear el rendimiento del equipo, optimizando las decisiones estratégicas.</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h4>VP de Alianzas de Reclutamiento</h4>
+                    <p class="company-info">Sprout.Hr | 2022 - 2024</p>
+                    <ul>
+                        <li>Gestioné alianzas estratégicas de reclutamiento para impulsar iniciativas de adquisición de talento.</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h4>Gerente de Adquisición de Talentos / Gerente de RRHH</h4>
+                    <p class="company-info">IT Crowd | 2017 - 2022</p>
+                    <ul>
+                        <li>Lideré estrategias de adquisición de talento de punta a punta para proyectos de software de startups, abarcando preventa, gestión de proyectos y control de calidad.</li>
+                        <li>Gestioné la asignación de recursos para proyectos utilizando metodologías ágiles, asegurando una ejecución y entrega exitosas.</li>
+                    </ul>
+                </div>
+            </section>
 
-            <div class="experience-item">
-                <h3>Gerente de Proyectos</h3>
-                <p>IT Crowd | Gran Buenos Aires, Argentina | Febrero 2025 – Presente (5 meses)</p>
-                <ul>
-                    <li>Liderando múltiples proyectos de desarrollo simultáneos para startups en etapa inicial, desde la concepción hasta el lanzamiento, utilizando metodologías Ágiles (Scrum/Kanban) para asegurar la entrega oportuna de MVPs y funcionalidades clave.</li>
-                    <li>Coordinando y capacitando a equipos multifuncionales (desarrolladores, diseñadores, QA), fomentando un ambiente de colaboración y traduciendo visiones complejas de productos en sprints de desarrollo claros y accionables.</li>
-                    <li>Implementando sólidas estrategias de seguimiento de proyectos y comunicación, y gestionando los procesos de facturación de clientes para garantizar operaciones fluidas y una comunicación clara con los stakeholders.</li>
-                </ul>
-            </div>
+            <section class="main-section" id="education">
+                <h3>Educación</h3>
+                <div class="education-item">
+                    <h4><span>(2001-2005)</span> Músico Intérprete Profesional</h4>
+                    <p class="institution-info">Sindicato Argentino de Músicos</p>
+                </div>
+                <div class="education-item">
+                    <h4><span>(1996-2001)</span> Licenciatura en Psicología (Incompleto)</h4>
+                    <p class="institution-info">Universidad de Buenos Aires</p>
+                </div>
+                <div class="education-item">
+                    <h4><span>(1990-1995)</span> Técnico en Computación</h4>
+                    <p class="institution-info">Escuelas Técnicas ORT</p>
+                </div>
+            </section>
 
-            <div class="experience-item">
-                <h3>Director Ejecutivo (CEO)</h3>
-                <p>IT Scout | Provincia de Buenos Aires, Argentina | Enero 2022 – Febrero 2025 (3 años 2 meses)</p>
-                <ul>
-                    <li>Co-fundé y escalé IT Scout, liderando todas las facetas estratégicas y operativas de la empresa, incluida la supervisión directa e indirecta de todas las áreas para garantizar el correcto funcionamiento y la resolución de conflictos.</li>
-                    <li>Dirigí la toma de decisiones financieras integrales, la gestión de recursos y las operaciones en busca de las estrategias globales de la empresa.</li>
-                    <li>Cultivé y mantuve relaciones clave con los clientes, estableciendo el contacto inicial y asegurando asociaciones a largo plazo.</li>
-                    <li>Lideré la prospección de mercado y el análisis exploratorio, identificando nuevas oportunidades de crecimiento (nuevos mercados, productos, servicios) para la expansión de la empresa.</li>
-                    <li>Desarrollé y utilicé un marco de métricas clave para ayudar en las proyecciones y monitorear el rendimiento del equipo, optimizando las decisiones estratégicas.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>VP de Alianzas de Reclutamiento</h3>
-                <p>Sprout.Hr | Octubre 2022 – Marzo 2024 (1 año 6 meses)</p>
-                <ul>
-                    <li>Gestioné alianzas estratégicas de reclutamiento para impulsar iniciativas de adquisición de talento.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Gerente de Adquisición de Talentos / Gerente de RRHH</h3>
-                <p>IT Crowd | Gran Buenos Aires, Argentina | mayo de 2017 – enero de 2022 (4 años 9 meses)</p>
-                <ul>
-                    <li>Lideré estrategias de adquisición de talento de punta a punta para proyectos de software de startups, abarcando preventa, gestión de proyectos y control de calidad.</li>
-                    <li>Gestioné la asignación de recursos para proyectos utilizando metodologías ágiles, asegurando una ejecución y entrega exitosas.</li>
-                </ul>
-            </div>
-            
-            <div class="experience-item">
-                <h3>Gerente de Desarrollo de Negocios</h3>
-                <p>IT Crowd | Argentina | Diciembre 2014 – Mayo 2017 (2 años 6 meses)</p>
-                <ul>
-                    <li>Enfocado en actividades de preventa, gestión de proyectos y adquisición de talento.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Ingeniero de QA / Gerente de Proyectos</h3>
-                <p>Bytelion.com | Diciembre 2014 – Mayo 2017 (2 años 6 meses)</p>
-                <ul>
-                    <li>Realicé pruebas, definí procesos de QA y realicé análisis funcionales para aplicaciones web/móviles.</li>
-                    <li>Apliqué principios de gestión de proyectos Ágiles para el desarrollo de aplicaciones web y móviles.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Gerente de Soluciones de Negocio, Western Union (Pago Fácil)</h3>
-                <p>Atos | Argentina | Marzo 2012 – Noviembre 2014 (2 años 9 meses)</p>
-                <ul>
-                    <li>Serví como punto focal del cliente, priorizando el desarrollo con el equipo técnico según los requisitos del cliente.</li>
-                </ul>
-            </div>
-            
-            <div class="experience-item">
-                <h3>Líder Técnico</h3>
-                <p>Atos | Buenos Aires, Argentina | Abril 2011 – Marzo 2012 (1 año)</p>
-                <ul>
-                    <li>Coordiné el equipo de desarrollo en Western Union (Pago Fácil).</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Líder Técnico</h3>
-                <p>Siemens | Buenos Aires, Argentina | Marzo 2007 – Abril 2011 (4 años 2 meses)</p>
-                <ul>
-                    <li>Coordiné el equipo de desarrollo para proyectos en Correo Argentino.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Gerente de Configuración</h3>
-                <p>Siemens | Buenos Aires, Argentina | junio de 2000 – marzo de 2007 (6 años 10 meses)</p>
-                <ul>
-                    <li>Gestioné configuraciones y desarrollé scripts para proyectos en Correo Argentino.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Desarrollador Pinnacle Plus - Mosaic</h3>
-                <p>Buenos Aires, Argentina | Marzo 1997 – Junio 2000 (3 años 4 meses)</p>
-                <ul>
-                    <li>Realicé desarrollo front-end en Banco Francés y Correo Argentino.</li>
-                </ul>
-            </div>
-
-        </section>
-
-        <section id="skills" class="pdf-avoid-break">
-            <h2>Habilidades</h2>
-            <ul class="skills-list">
-                <li>Herramientas de Gestión de Proyectos (Jira, Asana, Trello)</li>
-                <li>Metodologías Ágiles (Scrum, Kanban)</li>
-                <li>Gestión de Interesados</li>
-                <li>Liderazgo de Equipos</li>
-                <li>Planificación Estratégica</li>
-                <li>Ciclo de Vida del Desarrollo de Software (SDLC)</li>
-                <li>Gestión de Riesgos</li>
-                <li>Gestión de Presupuestos</li>
-                <li>Estrategia de TI</li>
-                <li>Desarrollo de Negocios</li>
-                <li>Estrategia de Adquisición de Talentos</li>
-                <li>Búsqueda de Candidatos</li>
-                <li>Entrevistas</li>
-                <li>Operaciones de RRHH</li>
-                <li>Reclutamiento de TI</li>
-                <li>Consultoría de TI</li>
-                <li>Pensamiento Analítico</li>
-                <li>Resolución de Problemas</li>
-                <li>Resolución de Conflictos</li>
-                <li>Adaptabilidad</li>
-                <li>Visión de Negocio</li>
-                <li>Programación de Software (ej. Python si aplica)</li>
-                <li>Aseguramiento de Calidad (QA)</li>
-            </ul>
-        </section>
-
-        <section id="certifications" class="pdf-avoid-break">
-            <h2>Certificaciones</h2>
-            <div class="certifications-list">
-                <ul>
-                    <li><strong>Certified Tech Developer:</strong> Digital House (2023)</li>
-                    <li><strong>Scrum Fundamentals Certified:</strong> SCRUMstudy (2023)</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="education" class="pdf-avoid-break">
-            <h2>Educación</h2>
-            <div class="education-item">
-                <h3>Psicología (Incompleto)</h3>
-                <p>Universidad de Buenos Aires / UBA | 1996-2001 </p>
-            </div>
-            <div class="education-item">
-                <h3>Técnico en Computación</h3>
-                <p>Escuelas Técnicas ORT | 1990-1995 </p>
-            </div>
-            <div class="education-item">
-                <h3>Músico Intérprete Profesional</h3>
-                <p>Sindicato Argentino de Músicos | 2001-2005 </p>
-            </div>
-        </section>
-
-        <section id="languages" class="pdf-avoid-break">
-            <h2>Idiomas</h2>
-            <ul>
-                <li><strong>Español:</strong> Nativo</li>
-                <li><strong>Inglés:</strong> Dominio Profesional Completo</li>
-            </ul>
-        </section>
+            <section class="main-section" id="certifications">
+                 <h3>Certificaciones</h3>
+                 <p>Certified Tech Developer: Digital House (2023)</p>
+                 <p>Scrum Fundamentals Certified: SCRUMstudy (2023)</p>
+            </section>
+        </main>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>

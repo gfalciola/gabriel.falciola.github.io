@@ -6,520 +6,314 @@
     <title>Gabriel Falciola - Professional Profile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --background-color: #ecf0f1;
-            --text-color: #34495e;
-            --card-background: #ffffff;
-            --shadow-color: rgba(0,0,0,0.1);
-            --border-color: #bdc3c7;
+            --sidebar-bg: #f3f4f6;
+            --main-bg: #ffffff;
+            --text-color: #111827;
+            --text-secondary: #4b5563;
+            --accent-color: #000000;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
             color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
+            background-color: var(--main-bg);
+            line-height: 1.7;
         }
 
         .language-switcher {
-            text-align: right;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
-        }
-
-        .language-switcher a, .language-switcher span {
-            color: white;
-            text-decoration: none;
-            margin: 0 5px;
-            font-weight: bold;
-        }
-
-        .language-switcher a:hover {
-            text-decoration: underline;
+            display: none; /* Will be hidden for this design, can be re-enabled later */
         }
         
-        .language-switcher .current-lang {
-            font-weight: bold;
-            color: var(--secondary-color);
+        .resume-container {
+            display: flex;
+            max-width: 1200px;
+            min-height: 100vh;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
-        #download-pdf-en, #download-pdf-es {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Lato', sans-serif;
-            font-weight: bold;
-            margin-left: 15px;
+        .sidebar {
+            background-color: var(--sidebar-bg);
+            width: 35%;
+            padding: 40px 30px;
+            color: var(--text-secondary);
         }
 
-        #download-pdf-en:hover, #download-pdf-es:hover {
-            background-color: #2980b9;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
+        .main-content {
+            background-color: var(--main-bg);
+            width: 65%;
+            padding: 40px 50px;
         }
 
         .profile-pic {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 4px solid var(--secondary-color);
             object-fit: cover;
-            object-position: 20% 50%;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px var(--shadow-color);
+            object-position: center;
+            margin: 0 auto 30px auto;
+            display: block;
+            border: 5px solid var(--main-bg);
         }
 
-        header {
-            text-align: left;
-            padding-bottom: 30px;
+        .sidebar-section {
             margin-bottom: 30px;
-            border-bottom: 2px solid var(--secondary-color);
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            gap: 40px;
         }
 
-        .header-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+        .sidebar-section h2 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 900;
+            font-size: 1.4em;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
-        #about {
-            flex: 1.5;
-            margin: 0;
-            padding: 0;
-            background-color: transparent;
-            box-shadow: none;
-            border-radius: 0;
+        .contact-info p, .skills-list p, .languages-list p {
+            margin-bottom: 8px;
         }
         
-        #about h2 {
-            margin-top: 0;
-        }
-
-        header h1 {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 2.8em;
-            font-weight: 700;
-        }
-        header p {
-            margin: 10px 0;
-            font-size: 1.2em;
-            color: var(--secondary-color);
-            font-style: italic;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-            font-size: 1em;
-        }
         .contact-info a {
-            color: var(--primary-color);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s ease;
         }
+        
         .contact-info a:hover {
-            color: var(--secondary-color);
+            color: var(--accent-color);
             text-decoration: underline;
         }
-        .contact-info span {
-            display: inline-flex;
-            align-items: center;
+
+        .languages-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .languages-list p.language-name {
+            font-weight: 700;
+            color: var(--text-color);
         }
 
-        section {
-            margin-bottom: 30px;
-            padding: 25px;
-            background-color: var(--card-background);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px var(--shadow-color);
+        .main-header h1 {
+            font-family: 'Lato', sans-serif;
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 0;
+            line-height: 1.1;
         }
 
-        section h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-            margin-bottom: 20px;
+        .main-header h2 {
+            font-family: 'Lato', sans-serif;
             font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .main-section {
+            margin-bottom: 30px;
+        }
+
+        .main-section h3 {
+            font-family: 'Lato', sans-serif;
+            font-weight: 900;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
         }
         
+        #about-me p {
+             font-size: 1.05em;
+        }
+
         .experience-item, .education-item {
             margin-bottom: 25px;
-            padding-left: 15px;
-            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .experience-item h4, .education-item h4 {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 2px;
         }
 
-        .experience-item:last-child, .education-item:last-child {
-            margin-bottom: 0;
+        .experience-item .company-info, .education-item .institution-info {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 10px;
         }
-
-        .experience-item h3, .education-item h3 {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 1.3em;
-        }
-        .experience-item p, .education-item p {
-            margin: 5px 0;
-            font-style: italic;
-            color: #7f8c8d;
-        }
+        
         .experience-item ul {
-            list-style-type: none;
+            list-style: none;
             padding-left: 0;
-            margin-top: 10px;
         }
+        
         .experience-item ul li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
+             padding-left: 20px;
+             position: relative;
         }
+
         .experience-item ul li::before {
             content: '›';
             position: absolute;
             left: 0;
-            color: var(--secondary-color);
+            color: var(--accent-color);
             font-weight: bold;
-            font-size: 1.2em;
         }
 
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            list-style: none;
-            padding: 0;
-        }
-        .skills-list li {
-            background-color: var(--secondary-color);
-            color: var(--card-background);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.95em;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+        .education-item h4 span {
+            font-weight: 400;
         }
 
-        .skills-list li:hover {
-            background-color: var(--primary-color);
-        }
-
-        .certifications-list ul, #languages ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .certifications-list ul li, #languages ul li {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        @media (max-width: 768px) {
-            header {
+        @media (max-width: 1024px) {
+            .resume-container {
                 flex-direction: column;
-                align-items: center;
-                text-align: center;
             }
-            .header-content {
-                align-items: center;
-            }
-            .contact-info {
-                align-items: center;
-            }
-            .container {
-                padding: 15px;
-            }
-            header h1 {
-                font-size: 2.2em;
-            }
-            header p {
-                font-size: 1.1em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-             header p {
-                font-size: 1em;
-            }
-            section {
-                padding: 20px;
-            }
-            section h2 {
-                font-size: 1.5em;
+            .sidebar, .main-content {
+                width: 100%;
             }
         }
 
         @media print {
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #fff;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .container {
-                max-width: 100%;
-                margin: 0;
-                padding: 0;
+            body { background-color: white; }
+            .resume-container {
+                display: block;
                 box-shadow: none;
             }
-
-            header, section {
-                box-shadow: none;
-                border-radius: 0;
-                border-bottom: 1px solid var(--border-color);
-            }
-            
-            section {
+            .sidebar, .main-content {
+                width: 100%;
                 padding: 20px 0;
             }
-            
-            .language-switcher, #download-pdf-en, #download-pdf-es {
-                display: none;
-            }
-
-            section:hover {
-                transform: none;
-            }
-
-            .page-break-before {
-                page-break-before: always;
-            }
-
-            .page-break-after {
-                page-break-after: always;
-            }
-
-            .page-break-inside-avoid {
-                page-break-inside: avoid;
-            }
-
-            a {
-                text-decoration: none;
-                color: inherit;
-            }
+            .sidebar { background-color: white; }
+            .profile-pic { border: none; }
         }
     </style>
 </head>
 <body>
     <div class="language-switcher">
-        <span class="current-lang">English</span> | <a href="es.html">Español</a>
+        <a href="es.html">Español</a>
         <button id="download-pdf-full-en">Download Full PDF</button>
         <button id="download-pdf-short-en">Download Summary PDF</button>
     </div>
 
-    <div class="container" id="resume-content-en">
-        <header>
-            <div class="header-content">
-                <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
+    <div class="resume-container" id="resume-content-en">
+        <aside class="sidebar">
+            <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
+            
+            <section class="sidebar-section contact-info">
+                <h2>Contact</h2>
+                <p><a href="mailto:gabriel.falciola@gmail.com">gabriel.falciola@gmail.com</a></p>
+                <p>Neuquén 1718, 4° A, Capital Federal, Buenos Aires, Argentina</p>
+                <p><a href="https://www.linkedin.com/in/gabrielfalciola/" target="_blank">linkedin.com/in/gabrielfalciola</a></p>
+                <p>+54 9 11 6727-5912</p>
+            </section>
+
+            <section class="sidebar-section skills-list">
+                <h2>Skills</h2>
+                <p>Leadership</p>
+                <p>IT Recruiting</p>
+                <p>Analytical</p>
+                <p>Team Player</p>
+                <p>Creative</p>
+                <p>Project management tools</p>
+                <p>Software programming</p>
+                <p>Recruiting toolkit</p>
+            </section>
+
+            <section class="sidebar-section languages-list">
+                <h2>Languages</h2>
+                <p class="language-name">Spanish</p>
+                <p>Native</p>
+                <p class="language-name">English</p>
+                <p>Full Professional Proficiency</p>
+            </section>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
                 <h1>Gabriel Falciola</h1>
-                <p>Project Manager | IT Leader | Talent & Strategy | Driving Innovation</p>
-                <div class="contact-info">
-                    <span>Buenos Aires, Argentina</span>
-                    <a href="mailto:gabriel.falciola@gmail.com">gabriel.falciola@gmail.com</a>
-                    <a href="https://www.linkedin.com/in/gabrielfalciola/" target="_blank">linkedin.com/in/gabrielfalciola</a>
-                    <span>+54 9 11 6727-5912</span>
-                </div>
-            </div>
-            <section id="about">
-                <h2>About Me</h2>
+                <h2>Project Manager | IT Leader | Talent & Strategy | Driving Innovation</h2>
+            </header>
+
+            <section class="main-section" id="about-me">
+                <h3>About Me</h3>
                 <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to dynamic and innovative environments.</p>
             </section>
-        </header>
 
-        <section id="experience" class="pdf-avoid-break pdf-page-break">
-            <h2>Experience</h2>
+            <section class="main-section" id="experience">
+                <h3>Experience</h3>
+                <div class="experience-item">
+                    <h4>Project Manager</h4>
+                    <p class="company-info">IT Crowd | 2024 - Present</p>
+                    <ul>
+                        <li>Leading multiple concurrent development projects for early-stage startups, from ideation to launch, utilizing Agile methodologies (Scrum/Kanban) to ensure timely delivery of MVPs and key features.</li>
+                        <li>Coordinating and empowering cross-functional teams (developers, designers, QA), fostering a collaborative environment and translating complex product visions into clear, actionable development sprints.</li>
+                        <li>Implementing robust project tracking and communication strategies, and managing client billing processes to ensure smooth operations and clear stakeholder communication.</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h4>Chief Executive Officer</h4>
+                    <p class="company-info">IT Scout | 2022 - 2024</p>
+                    <ul>
+                        <li>Co-founded and scaled IT Scout, leading all strategic and operational facets of the company, including direct and indirect supervision of all areas to ensure proper functioning and conflict resolution.</li>
+                        <li>Directed comprehensive financial decision-making, resource management, and operations in pursuit of global company strategies.</li>
+                        <li>Cultivated and maintained key client relationships, establishing initial contact and ensuring long-term partnerships.</li>
+                        <li>Led market prospecting and exploratory analysis, identifying new growth opportunities (new markets, products, services) for company expansion.</li>
+                        <li>Developed and utilized a framework of key metrics to assist projections and monitor team performance, optimizing strategic decisions.</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h4>VP of Recruitment Partnerships</h4>
+                    <p class="company-info">Sprout.Hr | 2022 - 2024</p>
+                    <ul>
+                        <li>Managed strategic recruitment partnerships to drive talent acquisition initiatives.</li>
+                    </ul>
+                </div>
+                 <div class="experience-item">
+                    <h4>Talent Acquisition Manager / HR Manager</h4>
+                    <p class="company-info">IT Crowd | 2017 - 2022</p>
+                    <ul>
+                        <li>Led end-to-end talent acquisition strategies for startup software projects, encompassing pre-sales, project management, and quality assurance.</li>
+                        <li>Managed resource allocation for projects using agile methodologies, ensuring successful execution and delivery.</li>
+                    </ul>
+                </div>
+            </section>
 
-            <div class="experience-item">
-                <h3>Project Manager</h3>
-                <p>IT Crowd | Greater Buenos Aires, Argentina | February 2025 – Present (5 months)</p>
-                <ul>
-                    <li>Leading multiple concurrent development projects for early-stage startups, from ideation to launch, utilizing Agile methodologies (Scrum/Kanban) to ensure timely delivery of MVPs and key features. </li>
-                    <li>Coordinating and empowering cross-functional teams (developers, designers, QA), fostering a collaborative environment and translating complex product visions into clear, actionable development sprints. </li>
-                    <li>Implementing robust project tracking and communication strategies, and managing client billing processes to ensure smooth operations and clear stakeholder communication. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Chief Executive Officer</h3>
-                <p>IT Scout | Buenos Aires Province, Argentina | January 2022 – February 2025 (3 years 2 months)</p>
-                <ul>
-                    <li>Co-founded and scaled IT Scout, leading all strategic and operational facets of the company, including direct and indirect supervision of all areas to ensure proper functioning and conflict resolution.</li>
-                    <li>Directed comprehensive financial decision-making, resource management, and operations in pursuit of global company strategies. </li>
-                    <li>Cultivated and maintained key client relationships, establishing initial contact and ensuring long-term partnerships. </li>
-                    <li>Led market prospecting and exploratory analysis, identifying new growth opportunities (new markets, products, services) for company expansion. </li>
-                    <li>Developed and utilized a framework of key metrics to assist projections and monitor team performance, optimizing strategic decisions. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>VP of Recruitment Partnerships</h3>
-                <p>Sprout.Hr | October 2022 – March 2024 (1 year 6 months)</p>
-                <ul>
-                    <li>Managed strategic recruitment partnerships to drive talent acquisition initiatives. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Talent Acquisition Manager / HR Manager</h3>
-                <p>IT Crowd | Greater Buenos Aires, Argentina | May 2017 – January 2022 (4 years 9 months)</p>
-                <ul>
-                    <li>Led end-to-end talent acquisition strategies for startup software projects, encompassing pre-sales, project management, and quality assurance. </li>
-                    <li>Managed resource allocation for projects using agile methodologies, ensuring successful execution and delivery. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Business Development Manager</h3>
-                <p>IT Crowd | Argentina | December 2014 – May 2017 (2 years 6 months)</p>
-                <ul>
-                    <li>Focused on pre-sales, project management, and talent acquisition activities. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>QA Engineer / Project Manager</h3>
-                <p>Bytelion.com | December 2014 – May 2017 (2 years 6 months)</p>
-                <ul>
-                    <li>Conducted testing, defined QA processes, and performed functional analysis for web/mobile applications. </li>
-                    <li>Applied Agile project management principles for web and mobile app development. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Business Solution Manager, Western Union (Pago Fácil)</h3>
-                <p>Atos | Argentina | March 2012 – November 2014 (2 years 9 months)</p>
-                <ul>
-                    <li>Served as the client focal point, prioritizing development with the software factory based on client requirements. </li>
-                </ul>
-            </div>
+            <section class="main-section" id="education">
+                <h3>Education</h3>
+                <div class="education-item">
+                    <h4>(2001-2005) Professional Music Interpreter</h4>
+                    <p class="institution-info">Argentine Musicians Union</p>
+                </div>
+                <div class="education-item">
+                    <h4><span>(1996-2001)</span> BS in Psychology (Incomplete)</h4>
+                    <p class="institution-info">University of Buenos Aires</p>
+                </div>
+                <div class="education-item">
+                    <h4><span>(1990-1995)</span> Computer Technician</h4>
+                    <p class="institution-info">ORT Technical Schools</p>
+                </div>
+            </section>
             
-            <div class="experience-item">
-                <h3>Technical Leader</h3>
-                <p>Atos | Buenos Aires, Argentina | April 2011 – March 2012 (1 year)</p>
-                <ul>
-                    <li>Coordinated the development team at Western Union (Pago Fácil). </li>
-                </ul>
-            </div>
+            <section class="main-section" id="certifications">
+                 <h3>Certifications</h3>
+                 <p>Certified Tech Developer: Digital House (2023)</p>
+                 <p>Scrum Fundamentals Certified: SCRUMstudy (2023)</p>
+            </section>
 
-            <div class="experience-item">
-                <h3>Technical Leader</h3>
-                <p>Siemens | Buenos Aires, Argentina | March 2007 – April 2011 (4 years 2 months)</p>
-                <ul>
-                    <li>Coordinated the development team for projects at Correo Argentino. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Configuration Manager</h3>
-                <p>Siemens | Buenos Aires, Argentina | June 2000 – March 2007 (6 years 10 months)</p>
-                <ul>
-                    <li>Managed configurations and developed scripts for projects at Correo Argentino. </li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Pinnacle Plus - Mosaic Developer</h3>
-                <p>Buenos Aires, Argentina | March 1997 – June 2000 (3 years 4 months)</p>
-                <ul>
-                    <li>Performed front-end development at Banco Francés and Correo Argentino. </li>
-                </ul>
-            </div>
-
-        </section>
-
-        <section id="skills" class="pdf-avoid-break">
-            <h2>Skills</h2>
-            <ul class="skills-list">
-                <li>Project Management Tools (Jira, Asana, Trello)</li>
-                <li>Agile Methodologies (Scrum, Kanban)</li>
-                <li>Stakeholder Management</li>
-                <li>Team Leadership</li>
-                <li>Strategic Planning</li>
-                <li>Software Development Life Cycle (SDLC)</li>
-                <li>Risk Management</li>
-                <li>Budget Management</li>
-                <li>IT Strategy</li>
-                <li>Business Development</li>
-                <li>Talent Acquisition Strategy</li>
-                <li>Candidate Sourcing</li>
-                <li>Interviewing</li>
-                <li>HR Operations</li>
-                <li>IT Recruitment</li>
-                <li>IT Consulting</li>
-                <li>Analytical Thinking</li>
-                <li>Problem-Solving</li>
-                <li>Conflict Resolution</li>
-                <li>Adaptability</li>
-                <li>Business Acumen</li>
-                <li>Software Programming (e.g., Python if applicable)</li>
-                <li>Quality Assurance (QA)</li>
-            </ul>
-        </section>
-
-        <section id="certifications" class="pdf-avoid-break">
-            <h2>Certifications</h2>
-            <div class="certifications-list">
-                <ul>
-                    <li>DAT208x: Introduction to Python for Data Science </li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="education" class="pdf-avoid-break">
-            <h2>Education</h2>
-            <div class="education-item">
-                <h3>Psychology (Incomplete)</h3>
-                <p>Universidad de Buenos Aires / UBA | 1996-2001 </p>
-            </div>
-            <div class="education-item">
-                <h3>Computer Technician</h3>
-                <p>ORT Technical Schools | 1990-1995 </p>
-            </div>
-            <div class="education-item">
-                <h3>Professional Music Interpreter</h3>
-                <p>Argentine Musicians Union | 2001-2005 </p>
-            </div>
-        </section>
-
-        <section id="languages" class="pdf-avoid-break">
-            <h2>Languages</h2>
-            <ul>
-                <li><strong>Spanish:</strong> Native Speaker </li>
-                <li><strong>English:</strong> Full Professional Proficiency</li>
-            </ul>
-        </section>
+        </main>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
