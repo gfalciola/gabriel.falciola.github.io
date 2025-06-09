@@ -28,10 +28,43 @@
             color: var(--text-color);
             background-color: var(--main-bg);
             line-height: 1.7;
+            padding-top: 50px; /* Space for control bar */
+        }
+
+        .controls-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2d3748;
+            color: white;
+            padding: 10px 50px;
+            z-index: 100;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .controls-bar a, .controls-bar button {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            background: none;
+            border: 1px solid transparent;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        .controls-bar a:hover, .controls-bar button:hover {
+            background-color: #4a5568;
         }
 
         .language-switcher {
-            display: none; /* Will be hidden for this design, can be re-enabled later */
+            display: none;
         }
         
         .resume-container {
@@ -97,8 +130,12 @@
 
         .languages-list {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            grid-template-columns: auto 1fr;
+            gap: 0 15px;
+            align-items: center;
+        }
+        .languages-list p {
+            margin-bottom: 10px;
         }
         .languages-list p.language-name {
             font-weight: 700;
@@ -147,6 +184,22 @@
             font-size: 1.2em;
             font-weight: 700;
             margin-bottom: 2px;
+            cursor: pointer;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .experience-item h4::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 1.5em;
+            line-height: 1;
+            transition: transform 0.3s;
+        }
+        
+        .experience-item.active h4::after {
+            transform: rotate(45deg);
         }
 
         .experience-item .company-info, .education-item .institution-info {
@@ -158,6 +211,14 @@
         .experience-item ul {
             list-style: none;
             padding-left: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        
+        .experience-item.active ul {
+            max-height: 500px; /* Adjust as needed */
+            margin-top: 10px;
         }
         
         .experience-item ul li {
@@ -187,7 +248,8 @@
         }
 
         @media print {
-            body { background-color: white; }
+            body { padding-top: 0; background-color: white; }
+            .controls-bar { display: none; }
             .resume-container {
                 display: block;
                 box-shadow: none;
@@ -202,8 +264,8 @@
     </style>
 </head>
 <body>
-    <div class="language-switcher">
-        <a href="index.html">English</a> | <span class="current-lang">Español</span>
+    <div class="controls-bar">
+        <a href="index.html">View in English</a>
         <button id="download-pdf-full-es">Descargar PDF Completo</button>
         <button id="download-pdf-short-es">Descargar PDF Resumido</button>
     </div>
@@ -232,12 +294,14 @@
                 <p>Kit de herramientas de reclutamiento</p>
             </section>
 
-            <section class="sidebar-section languages-list">
+            <section class="sidebar-section">
                 <h2>Idiomas</h2>
-                <p class="language-name">Español</p>
-                <p>Nativo</p>
-                <p class="language-name">Inglés</p>
-                <p>Dominio Profesional Completo</p>
+                <div class="languages-list">
+                    <p class="language-name">Español</p>
+                    <p>Nativo</p>
+                    <p class="language-name">Inglés</p>
+                    <p>Dominio Profesional Completo</p>
+                </div>
             </section>
         </aside>
 
@@ -317,52 +381,60 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
-        const downloadButtons = document.querySelector('.language-switcher');
-
-        const pdfOptions = {
-            margin:       0.5,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-            pagebreak:    { before: '.pdf-page-break', avoid: ['.pdf-avoid-break', 'section', '.experience-item'] }
-        };
-
-        // Full Resume
-        document.getElementById('download-pdf-full-es').addEventListener('click', function () {
-            const element = document.getElementById('resume-content-es');
-            const opt = {
-                ...pdfOptions,
-                filename: 'Gabriel-Falciola-CV-Completo.pdf'
-            };
-            
-            downloadButtons.style.display = 'none';
-            html2pdf().set(opt).from(element).save().then(() => {
-                downloadButtons.style.display = 'block';
-            });
-        });
-
-        // Short Resume
-        document.getElementById('download-pdf-short-es').addEventListener('click', function () {
-            const element = document.getElementById('resume-content-es');
-            const hiddenLists = [];
-
-            element.querySelectorAll('#experience .experience-item ul').forEach(list => {
-                hiddenLists.push({element: list, originalDisplay: list.style.display});
-                list.style.display = 'none';
-            });
-
-            const opt = {
-                ...pdfOptions,
-                filename: 'Gabriel-Falciola-CV-Corto.pdf'
-            };
-
-            downloadButtons.style.display = 'none';
-            html2pdf().set(opt).from(element).save().then(() => {
-                hiddenLists.forEach(item => {
-                    item.element.style.display = item.originalDisplay || '';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion logic
+            const experienceHeaders = document.querySelectorAll('.experience-item h4');
+            experienceHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    header.parentElement.classList.toggle('active');
                 });
-                downloadButtons.style.display = 'block';
             });
+
+            const controlsBar = document.querySelector('.controls-bar');
+            const pdfOptions = {
+                margin: 0.5,
+                filename: 'Gabriel-Falciola-CV.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            const resumeElement = document.getElementById('resume-content-es');
+
+            // Function to handle PDF download
+            function downloadPdf(isShort) {
+                const experienceItems = resumeElement.querySelectorAll('#experience .experience-item');
+                const originalStates = [];
+                
+                experienceItems.forEach(item => {
+                    originalStates.push(item.classList.contains('active'));
+                    if (isShort) {
+                        item.classList.remove('active');
+                    } else {
+                        item.classList.add('active');
+                    }
+                });
+
+                const currentPdfOptions = {
+                    ...pdfOptions,
+                    filename: isShort ? 'Gabriel-Falciola-CV-Resumido.pdf' : 'Gabriel-Falciola-CV-Completo.pdf'
+                };
+                
+                controlsBar.style.display = 'none';
+
+                html2pdf().set(currentPdfOptions).from(resumeElement).save().then(() => {
+                    controlsBar.style.display = 'flex';
+                    experienceItems.forEach((item, index) => {
+                        if (originalStates[index]) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                });
+            }
+
+            document.getElementById('download-pdf-full-es').addEventListener('click', () => downloadPdf(false));
+            document.getElementById('download-pdf-short-es').addEventListener('click', () => downloadPdf(true));
         });
     </script>
 </body>
