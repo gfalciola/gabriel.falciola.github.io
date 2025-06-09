@@ -83,14 +83,36 @@
         }
 
         header {
-            text-align: center;
+            text-align: left;
             padding-bottom: 30px;
             margin-bottom: 30px;
             border-bottom: 2px solid var(--secondary-color);
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 40px;
         }
+
+        .header-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #about {
+            flex: 1.5;
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+            box-shadow: none;
+            border-radius: 0;
+        }
+        
+        #about h2 {
+            margin-top: 0;
+        }
+
         header h1 {
             margin: 0;
             color: var(--primary-color);
@@ -105,9 +127,10 @@
         }
         .contact-info {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px 30px;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 10px;
             flex-wrap: wrap;
             margin-top: 20px;
             font-size: 1em;
@@ -219,6 +242,17 @@
         }
         
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .header-content {
+                align-items: center;
+            }
+            .contact-info {
+                align-items: center;
+            }
             .container {
                 padding: 15px;
             }
@@ -227,10 +261,6 @@
             }
             header p {
                 font-size: 1.1em;
-            }
-            .contact-info {
-                flex-direction: column;
-                gap: 10px;
             }
         }
 
@@ -311,21 +341,22 @@
 
     <div class="container" id="resume-content-en">
         <header>
-            <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
-            <h1>Gabriel Falciola</h1>
-            <p>Project Manager | IT Leader | Talent & Strategy | Driving Innovation</p>
-            <div class="contact-info">
-                <span>Buenos Aires, Argentina</span>
-                <a href="mailto:gabriel.falciola@gmail.com">gabriel.falciola@gmail.com</a>
-                <a href="https://www.linkedin.com/in/gabrielfalciola/" target="_blank">linkedin.com/in/gabrielfalciola</a>
-                <span>+54 9 11 6727-5912</span>
+            <div class="header-content">
+                <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
+                <h1>Gabriel Falciola</h1>
+                <p>Project Manager | IT Leader | Talent & Strategy | Driving Innovation</p>
+                <div class="contact-info">
+                    <span>Buenos Aires, Argentina</span>
+                    <a href="mailto:gabriel.falciola@gmail.com">gabriel.falciola@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/gabrielfalciola/" target="_blank">linkedin.com/in/gabrielfalciola</a>
+                    <span>+54 9 11 6727-5912</span>
+                </div>
             </div>
+            <section id="about">
+                <h2>About Me</h2>
+                <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to dynamic and innovative environments.</p>
+            </section>
         </header>
-
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to dynamic and innovative environments.</p>
-        </section>
 
         <section id="experience" class="pdf-avoid-break pdf-page-break">
             <h2>Experience</h2>
