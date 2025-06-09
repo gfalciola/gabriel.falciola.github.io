@@ -306,7 +306,7 @@
     <div class="language-switcher">
         <span class="current-lang">English</span> | <a href="es.html">Español</a>
         <button id="download-pdf-full-en">Download Full PDF</button>
-        <button id="download-pdf-10y-en">Download 10-Year PDF</button>
+        <button id="download-pdf-short-en">Download Summary PDF</button>
     </div>
 
     <div class="container" id="resume-content-en">
@@ -508,7 +508,7 @@
             const element = document.getElementById('resume-content-en');
             const opt = {
                 ...pdfOptions,
-                filename: 'Gabriel-Falciola-Resume.pdf'
+                filename: 'Gabriel-Falciola-Resume-Full.pdf'
             };
             
             downloadButtons.style.display = 'none';
@@ -517,44 +517,25 @@
             });
         });
 
-        // 10-Year Resume
-        document.getElementById('download-pdf-10y-en').addEventListener('click', function () {
+        // Short Resume
+        document.getElementById('download-pdf-short-en').addEventListener('click', function () {
             const element = document.getElementById('resume-content-en');
-            const experienceItems = element.querySelectorAll('#experience .experience-item');
-            const tenYearsAgo = new Date().getFullYear() - 10;
-            const hiddenItems = [];
+            const hiddenLists = [];
 
-            experienceItems.forEach(item => {
-                try {
-                    const dateString = item.querySelector('p').textContent.split('|')[2].trim();
-                    const endDateString = dateString.split('–')[1].trim().split('(')[0].trim();
-                    
-                    let endDateYear;
-                    if (endDateString.toLowerCase() === 'present') {
-                        endDateYear = new Date().getFullYear();
-                    } else {
-                        const parts = endDateString.split(' ');
-                        endDateYear = parseInt(parts[1], 10);
-                    }
-
-                    if (endDateYear < tenYearsAgo) {
-                        item.style.display = 'none';
-                        hiddenItems.push(item);
-                    }
-                } catch (e) {
-                    console.error('Could not parse date for item:', item, e);
-                }
+            element.querySelectorAll('#experience .experience-item ul').forEach(list => {
+                hiddenLists.push({element: list, originalDisplay: list.style.display});
+                list.style.display = 'none';
             });
 
             const opt = {
                 ...pdfOptions,
-                filename: 'Gabriel-Falciola-Resume-10-Years.pdf'
+                filename: 'Gabriel-Falciola-Resume-Short.pdf'
             };
 
             downloadButtons.style.display = 'none';
             html2pdf().set(opt).from(element).save().then(() => {
-                hiddenItems.forEach(item => {
-                    item.style.display = 'block';
+                hiddenLists.forEach(item => {
+                    item.element.style.display = item.originalDisplay || '';
                 });
                 downloadButtons.style.display = 'block';
             });
