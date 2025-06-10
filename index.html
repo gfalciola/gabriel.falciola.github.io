@@ -447,7 +447,7 @@
 
             const controlsBar = document.querySelector('.controls-bar');
             const pdfOptions = {
-                margin: 0.5,
+                margin: [0.7, 0.5, 0.7, 0.5], // Generous vertical margins
                 filename: 'Gabriel-Falciola-Resume.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 6, useCORS: true },
@@ -462,31 +462,15 @@
                 document.body.classList.add('printing');
                 const experienceItems = resumeElement.querySelectorAll('#experience .experience-item');
                 const originalAccordionStates = [];
-                const originalDisplayStates = [];
                 
-                if (isShort) {
-                    let cutOffExperience = false;
-                    experienceItems.forEach(item => {
-                        originalAccordionStates.push(item.classList.contains('active'));
-                        originalDisplayStates.push(item.style.display);
-                        
-                        item.classList.remove('active'); // Collapse all items for summary
-
-                        const title = item.querySelector('h4').textContent.trim();
-                        if (cutOffExperience) {
-                            item.style.display = 'none';
-                        }
-                        if (title === 'Business Solution Manager, Western Union (Pago Fácil)') {
-                            cutOffExperience = true;
-                        }
-                    });
-                } else {
-                    experienceItems.forEach(item => {
-                        originalAccordionStates.push(item.classList.contains('active'));
-                        originalDisplayStates.push(item.style.display);
-                        item.classList.add('active'); // Expand all for full version
-                    });
-                }
+                experienceItems.forEach(item => {
+                    originalAccordionStates.push(item.classList.contains('active'));
+                    if (isShort) {
+                        item.classList.remove('active'); // Collapse for summary
+                    } else {
+                        item.classList.add('active'); // Expand for full version
+                    }
+                });
 
                 const currentPdfOptions = {
                     ...pdfOptions,
@@ -500,7 +484,6 @@
                     document.body.style.paddingTop = ''; // Reset body padding
                     controlsBar.style.display = 'flex';
                     experienceItems.forEach((item, index) => {
-                        item.style.display = originalDisplayStates[index];
                         if (originalAccordionStates[index]) {
                             item.classList.add('active');
                         } else {
