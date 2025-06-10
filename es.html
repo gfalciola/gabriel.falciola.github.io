@@ -247,22 +247,25 @@
             }
         }
 
-        @media print {
-            body { padding-top: 0; background-color: white; }
-            .controls-bar { display: none; }
-            .resume-container {
-                display: block;
-                box-shadow: none;
-            }
-            .sidebar, .main-content {
-                width: 100%;
-                padding: 20px 0;
-            }
-            .sidebar { background-color: white; }
-            .profile-pic { border: none; }
-            .experience-item h4::after {
-                display: none;
-            }
+        /* --- Printing Styles --- */
+        body.printing {
+            padding-top: 0;
+            background-color: white;
+        }
+        .printing .controls-bar {
+            display: none;
+        }
+        .printing .resume-container {
+            box-shadow: none;
+        }
+        .printing .sidebar {
+             background-color: white;
+        }
+        .printing .profile-pic {
+            border: none;
+        }
+        .printing .experience-item h4::after {
+            display: none;
         }
     </style>
 </head>
@@ -442,6 +445,7 @@
 
             // Function to handle PDF download
             function downloadPdf(isShort) {
+                document.body.classList.add('printing');
                 const experienceItems = resumeElement.querySelectorAll('#experience .experience-item');
                 const originalStates = [];
                 
@@ -462,6 +466,7 @@
                 controlsBar.style.display = 'none';
 
                 html2pdf().set(currentPdfOptions).from(resumeElement).save().then(() => {
+                    document.body.classList.remove('printing');
                     controlsBar.style.display = 'flex';
                     experienceItems.forEach((item, index) => {
                         if (originalStates[index]) {
