@@ -92,11 +92,12 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            object-fit: cover;
-            object-position: 10% 50%;
             margin: 0 auto 30px auto;
             display: block;
             border: 5px solid var(--main-bg);
+            background-image: url('profile.jpg');
+            background-size: cover;
+            background-position: 10% 50%;
         }
 
         .sidebar-section {
@@ -278,7 +279,7 @@
 
     <div class="resume-container" id="resume-content-es">
         <aside class="sidebar">
-            <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
+            <div class="profile-pic"></div>
             
             <section class="sidebar-section contact-info">
                 <h2>Contacto</h2>
@@ -319,8 +320,10 @@
 
             <section class="main-section" id="about-me">
                 <h3>Sobre Mí</h3>
-                <p>Profesional de IT altamente calificado con más de 25 años de amplia experiencia liderando proyectos complejos, adquisición de talento estratégico y desarrollo de software. Capacidad demostrada para construir y potenciar equipos multifuncionales de alto rendimiento, gestionar iniciativas a gran escala e impulsar resultados de negocio tangibles a través de un liderazgo eficaz y soluciones innovadoras. Experto en cultivar relaciones sólidas con los clientes e identificar nuevas oportunidades de mercado, con una combinación de experiencia técnica y liderazgo centrado en las personas. Busco potenciar mi experiencia en Gestión de Proyectos y Liderazgo de IT para contribuir en entornos dinámicos e innovadores.</p>
+                <p>Profesional de IT con más de 25 años de experiencia liderando proyectos de desarrollo de software, adquisición de talento y soluciones innovadoras. Con una capacidad demostrada para construir y gestionar equipos multifuncionales de alto rendimiento, he dirigido iniciativas a gran escala y he impulsado resultados de negocio tangibles. Experto en cultivar relaciones sólidas con clientes y en identificar nuevas oportunidades de mercado, combino una profunda perspicacia técnica con un liderazgo centrado en las personas. Busco aplicar mi amplia experiencia en Gestión de Proyectos y Liderazgo de IT para contribuir a entornos dinámicos e innovadores.</p>
             </section>
+
+            <div class="pdf-page-break"></div>
 
             <section class="main-section" id="experience">
                 <h3>Experiencia</h3>
@@ -439,7 +442,8 @@
                 filename: 'Gabriel-Falciola-CV.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page-break' }
             };
             const resumeElement = document.getElementById('resume-content-es');
 

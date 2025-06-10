@@ -92,11 +92,12 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            object-fit: cover;
-            object-position: 10% 50%;
             margin: 0 auto 30px auto;
             display: block;
             border: 5px solid var(--main-bg);
+            background-image: url('profile.jpg');
+            background-size: cover;
+            background-position: 10% 50%;
         }
 
         .sidebar-section {
@@ -278,7 +279,7 @@
 
     <div class="resume-container" id="resume-content-en">
         <aside class="sidebar">
-            <img src="profile.jpg" alt="Gabriel Falciola" class="profile-pic">
+            <div class="profile-pic"></div>
             
             <section class="sidebar-section contact-info">
                 <h2>Contact</h2>
@@ -321,6 +322,8 @@
                 <h3>About Me</h3>
                 <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to dynamic and innovative environments.</p>
             </section>
+
+            <div class="pdf-page-break"></div>
 
             <section class="main-section" id="experience">
                 <h3>Experience</h3>
@@ -440,7 +443,8 @@
                 filename: 'Gabriel-Falciola-Resume.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page-break' }
             };
             const resumeElement = document.getElementById('resume-content-en');
 
