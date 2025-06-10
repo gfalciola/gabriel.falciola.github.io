@@ -258,6 +258,7 @@
         }
         .printing .resume-container {
             box-shadow: none;
+            min-height: 0;
         }
         .printing .sidebar {
              background-color: white;
@@ -447,7 +448,7 @@
                 margin: 0.5,
                 filename: 'Gabriel-Falciola-Resume.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 4, useCORS: true },
+                html2canvas: { scale: 6, useCORS: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
                 pagebreak: { mode: ['css', 'legacy'] }
             };
