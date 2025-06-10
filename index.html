@@ -446,6 +446,7 @@
 
             // Function to handle PDF download
             function downloadPdf(isShort) {
+                document.body.style.paddingTop = '0px'; // Force remove body padding
                 document.body.classList.add('printing');
                 const experienceItems = resumeElement.querySelectorAll('#experience .experience-item');
                 const originalStates = [];
@@ -461,6 +462,7 @@
 
                 const currentPdfOptions = {
                     ...pdfOptions,
+                    margin: [0.2, 0.4, 0.4, 0.4], // Smaller margins [Top, Left, Bottom, Right]
                     filename: isShort ? 'Gabriel-Falciola-Resume-Summary.pdf' : 'Gabriel-Falciola-Resume-Full.pdf'
                 };
                 
@@ -468,6 +470,7 @@
 
                 html2pdf().set(currentPdfOptions).from(resumeElement).save().then(() => {
                     document.body.classList.remove('printing');
+                    document.body.style.paddingTop = ''; // Reset body padding to default
                     controlsBar.style.display = 'flex';
                     experienceItems.forEach((item, index) => {
                         if (originalStates[index]) {
