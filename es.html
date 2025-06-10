@@ -268,6 +268,13 @@
         .printing .experience-item h4::after {
             display: none;
         }
+        .printing #about-me, .printing .skills-list {
+            page-break-after: always;
+        }
+        .printing .main-section:last-of-type,
+        .printing .sidebar-section:last-of-type {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -322,8 +329,6 @@
                 <h3>Sobre Mí</h3>
                 <p>Profesional de IT con más de 25 años de experiencia liderando proyectos de desarrollo de software, adquisición de talento y soluciones innovadoras. Con una capacidad demostrada para construir y gestionar equipos multifuncionales de alto rendimiento, he dirigido iniciativas a gran escala y he impulsado resultados de negocio tangibles. Experto en cultivar relaciones sólidas con clientes y en identificar nuevas oportunidades de mercado, combino una profunda perspicacia técnica con un liderazgo centrado en las personas. Busco aplicar mi amplia experiencia en Gestión de Proyectos y Liderazgo de IT para contribuir a entornos dinámicos e innovadores.</p>
             </section>
-
-            <div class="pdf-page-break"></div>
 
             <section class="main-section" id="experience">
                 <h3>Experiencia</h3>
@@ -441,9 +446,9 @@
                 margin: 0.5,
                 filename: 'Gabriel-Falciola-CV.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
+                html2canvas: { scale: 4, useCORS: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page-break' }
+                pagebreak: { mode: ['css', 'legacy'] }
             };
             const resumeElement = document.getElementById('resume-content-es');
 

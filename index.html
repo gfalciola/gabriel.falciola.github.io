@@ -268,6 +268,13 @@
         .printing .experience-item h4::after {
             display: none;
         }
+        .printing #about-me, .printing .skills-list {
+            page-break-after: always;
+        }
+        .printing .main-section:last-of-type,
+        .printing .sidebar-section:last-of-type {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -320,10 +327,8 @@
 
             <section class="main-section" id="about-me">
                 <h3>About Me</h3>
-                <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to dynamic and innovative environments.</p>
+                <p>Highly accomplished IT professional with over 25 years of extensive experience in leading complex IT projects, strategic talent acquisition, and software development. Proven ability to build and empower high-performing cross-functional teams, manage large-scale initiatives, and drive tangible business outcomes through effective leadership and innovative solutions. Adept at cultivating strong client relationships and identifying new market opportunities, with a unique blend of technical acumen and people-centric leadership. Seeking to leverage a comprehensive background in Project Management and IT Leadership to contribute to a dynamic and innovative environments.</p>
             </section>
-
-            <div class="pdf-page-break"></div>
 
             <section class="main-section" id="experience">
                 <h3>Experience</h3>
@@ -442,9 +447,9 @@
                 margin: 0.5,
                 filename: 'Gabriel-Falciola-Resume.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
+                html2canvas: { scale: 4, useCORS: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page-break' }
+                pagebreak: { mode: ['css', 'legacy'] }
             };
             const resumeElement = document.getElementById('resume-content-en');
 
