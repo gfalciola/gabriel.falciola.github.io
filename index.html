@@ -462,11 +462,18 @@
                 document.body.classList.add('printing');
                 const experienceItems = resumeElement.querySelectorAll('#experience .experience-item');
                 const originalAccordionStates = [];
+                const originalDisplayStates = [];
                 
-                experienceItems.forEach(item => {
+                experienceItems.forEach((item, index) => {
                     originalAccordionStates.push(item.classList.contains('active'));
+                    originalDisplayStates.push(item.style.display);
+
                     if (isShort) {
                         item.classList.remove('active'); // Collapse for summary
+                        // Hide last 3 items to ensure a 2-page summary
+                        if (index >= experienceItems.length - 3) {
+                            item.style.display = 'none';
+                        }
                     } else {
                         item.classList.add('active'); // Expand for full version
                     }
@@ -484,6 +491,7 @@
                     document.body.style.paddingTop = ''; // Reset body padding
                     controlsBar.style.display = 'flex';
                     experienceItems.forEach((item, index) => {
+                        item.style.display = originalDisplayStates[index];
                         if (originalAccordionStates[index]) {
                             item.classList.add('active');
                         } else {
